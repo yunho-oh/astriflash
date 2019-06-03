@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>AstriFlash</title>
+		<title>HARNESS</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -23,13 +23,23 @@
 							<!-- Header -->
 								<header id="header">
 									<a href="index.html" class="logo"><strong>HARNESS</strong> by PARSA</a>
-									<!-- <ul class="icons"> -->
-										<!-- <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li> -->
-										<!-- <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li> -->
-										<!-- <li><a href="#" class="icon fa-snapchat-ghost"><span class="label">Snapchat</span></a></li> -->
-										<!-- <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li> -->
-										<!-- <li><a href="#" class="icon fa-medium"><span class="label">Medium</span></a></li> -->
-									<!-- </ul> -->
+									<div align="right">
+										<span class="image object">
+										<a href="https://parsa.epfl.ch/" target="_blank"><img src="images/parsa-logo-sosh.png" alt="" width="200" height="100"/></a>
+									</span>
+									<span class="image object">
+										<a href="https://www.epfl.ch/" target="_blank"><img src="images/epfl-logo.jpg" alt="" width="200" height="100"/></a>
+									</span>
+								    </div>
+									<!--
+									<ul class="icons">
+										<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+										<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon fa-medium"><span class="label">Medium</span></a></li>
+									</ul>
+								-->
 								</header>
 
 							<!-- Banner -->
@@ -37,15 +47,15 @@
 									<div class="content">
 										<header>
 											<h1>HARNESS</h1>
-											<p>Set a key title</p>
+											<p>Co-designing server silicon with software support for next-generation datacenter</p>
 										</header>	
-										<p>What is Harness?</p>											
+										<p>Server architecture is entering an age of heterogeneity, as silicon performance scaling approaches its horizon and the economics of scale enables cost-effective deployment of custom silicon in the datacentre. Traditionally, customized components have been deployed as discrete expansion boards to reduce cost and design complexity to ensure compatibility with rigidly designed CPU silicon and its surrounding infrastructure. A prime example of this pattern is the tethering of todays Remote Direct Memory Access (RDMA) network interface cards to commodity PCIe interconnects. Although using a commodity I/O interconnect has enabled RDMA to be deployed at large scales in today's datacentres, our prior work on the "Scale-Out NUMA" project has shown that judiciously integrating architectural support directly on the CPU silicon provides significant benefits. Namely, integration affords lower RDMA latency and the ability to perform richer operations such as atomic accesses to software objects, and remote procedure calls. The HARNESS project therefore aims at co-designing server silicon with software to support the performance-critical primitives in the datacentre - in particular those pertaining to networked systems and storage stacks.</p>											
 										<!-- <ul class="actions"> -->
 											<!-- <li><a href="#" class="button big">Learn More</a></li> -->
 										<!-- </ul> -->
 									</div>
 									<span class="image object">
-										<img src="images/server.jpg" alt="" />
+										<img src="images/server.jpg" alt="" width="640" height="480"/>
 									</span>
 								</section>
 								
@@ -54,17 +64,17 @@
 									<div class="content">
 										<header>
 											<h2>NeBula</h2>
-											<p>???</p>
+											<p>RPC-Optimized Server Architecture</p>
 										</header>		
 
-										<p>Mark here is your space</p>		
+										<p>The complex software stacks which are responsible to deliver today's online services are often structured into numerous tiers, where the interactions between a service’s tiers take the form of Remote Procedure Calls (RPCs). Moreover, due to the vast improvements in networking bandwidths and kernel-bypassed networking, the limits of RPC performance will inevitably end up being dominated by the endpoints themselves. This is especially true as common runtimes of each RPC continue to shrink to the microsecond scale, latencies which are small enough that inefficient hardware can actually begin to impact the RPC's performance. A prime example of this impact is the increased memory latencies brought about from large on-chip interconnects, as well as any NUMA effects brought about by multi-socket servers. In the NEBULA project, we aim to design an RPC-optimized server architecture to address these challenges, enabling RPCs to be delivered to CPU cores with minimal latency. Furthermore, with today's server network cards already delivering bandwidths of 200Gbps, traditional CPU-centric approaches to RPC processing can simply no longer keep up. NEBULA also aims to push the appropriate RPC semantics into the network interface, saving CPU cycles and allowing the server to keep pace with higher packet rates.</p>		
 											
 										<!-- <ul class="actions"> -->
 											<!-- <li><a href="#" class="button big">Learn More</a></li> -->
 										<!-- </ul> -->
 									</div>
 									<span class="image object">
-										<img src="images/server.jpg" alt="" />
+										<img src="images/nebula.jpg" alt="" width="640" height="480"/>
 									</span>
 								</section>
 								
@@ -76,41 +86,40 @@
 											<p>Cost-Effective TB-Scale Memory Hierarchy for Next-Generation Datacenter </p>
 										</header>		
 
-										<p>With DRAM having slowed down in density scaling, the only path forward to improving density in servers is a tighter integration of denser technologies. Storage-class memory has the potential to improve density but has been on the horizon for a while and is likely to maintain a high cost in the near future. Solid State Disks (SSDs) offer a 50x density advantage (and cost/capacity) but with also 500x (50us) longer access latency over DRAM. As such, SSDs have historically been treated as storage devices connected as a peripheral and interfaced through a host OS. Because for many online services the end-to-end tail latency requirement is within hundreds of millisecond, we believe that a careful hardware/software co-design for a tighter integration of SSDs into a host CPU and DRAM cache would enable a substantial reduction in cost with no impact on throughput while maintaining end-to-end tail latency. We indicate a 32x reduction in DRAM capacity in a cache allowing for an overall 20x reduction in memory cost with an SSD.</p>		
-
-										<p>Current proposals for a tighter integration of SSDs argue for byte addressability. Unfortunately, the latter relies on conventional paging and address translation through host OS to promote pages between the SSD and DRAM which results in high swap overhead that takes up to 100’s of microseconds. Instead, we propose to investigate SSDs that are directly mapped into the address space with address translation support in hardware and a DRAM cache. We propose to investigate DRAM cache architectures that allow for high-bandwidth lookup by CPUs with custom support for miss handling. Due to the high latency of SSD access, we will investigate new miss handlers that would manage the DRAM cache as a page-based cache. Because of the high frequency of invoking such handlers, the traditional host OS swapping mechanisms are prohibitively expensive. Moreover, there is no need for TLB shootdowns or placing an eviction/writeback on the critical path of a page read. We will investigate hardware/software co-design (outside of a host OS) to manage a DRAM cache with a mapped SSD. </p>											
+										<p>With DRAM having slowed down in density scaling, the only path forward to improving density in servers is a tighter integration of denser technologies. Storage-class memory has the potential to improve density but has been on the horizon for a while and is likely to maintain a high cost in the near future. Solid State Disks (SSDs) offer a 50x density advantage (and cost/capacity) but with also 500x (50us) longer access latency over DRAM. As such, SSDs have historically been treated as storage devices connected as a peripheral and interfaced through a host OS. Because for many online services the end-to-end tail latency requirement is within hundreds of millisecond, we believe that a careful hardware/software co-design for a tighter integration of SSDs into a host CPU and DRAM cache would enable a substantial reduction in cost with no impact on throughput while maintaining end-to-end tail latency. We indicate a 32x reduction in DRAM capacity in a cache allowing for an overall 20x reduction in memory cost with an SSD. AstriFlash is a hardware/software co-design
+										to manage a DRAM cache with a mapped SSD. AstriFlash integrates SSDs that are directly mapped into the address space with address translation support in hardware and a DRAM cache that allow for high-bandwidth lookup by CPUs with custom support for miss handling. </p>											
 										<!-- <ul class="actions"> -->
 											<!-- <li><a href="#" class="button big">Learn More</a></li> -->
 										<!-- </ul> -->
 									</div>
 									<span class="image object">
-										<img src="images/server.jpg" alt="" />
+										<img src="images/ssd.jpg" alt="" width="640" height="480"/>
 									</span>
 								</section>	
 
 							<!-- Section -->
 								<section>
 									<section id="People">
-									<header class="People">
+									<header class="major">
 										<h2>People</h2>
 									</header>
 									<div class="posts">
 										<article>
-											<a href="#" class="image"><img src="images/sid.png" style="width: 50%; height: 50%" alt="" /></a>
+											<a href="https://sites.google.com/view/siddharthgupta04" target="_blank" class="image"><img src="images/sid.png" style="width: 50%; height: 50%" alt="" /></a>
 											<h3>Siddharth Gupta</h3>
 											<ul class="actions">
 												<!-- <li><a href="#" class="button">More</a></li> -->
 											</ul>
 										</article>
 										<article>
-											<a href="#" class="image"><img src="images/Mark-Sutherland.jpg" style="width: 50%; height: 50%" alt="" /></a>
+											<a href="https://sites.google.com/site/markjohnsutherland/" target="_blank" class="image"><img src="images/Mark-Sutherland.jpg" style="width: 50%; height: 50%" alt="" /></a>
 											<h3>Mark Sutherland</h3>
 											<ul class="actions">
 												<!-- <li><a href="#" class="button">More</a></li> -->
 											</ul>
 										</article>
 										<article>
-											<a href="#" class="image"><img src="images/oh.png" style="width: 50%; height: 50%" alt="" /></a>
+											<a href="https://yunho-oh.github.io/" target="_blank" class="image"><img src="images/oh.png" style="width: 50%; height: 50%" alt="" /></a>
 											<h3>Yunho Oh</h3>
 											<ul class="actions">
 												<!-- <li><a href="#" class="button">More</a></li> -->
@@ -125,7 +134,7 @@
 											</ul>
 										</article>
 										<article>
-											<a href="#" class="image"><img src="images/babak.png" style="width: 50%; height: 50%" alt="" /></a>
+											<a href="https://parsa.epfl.ch/~falsafi/" target="_blank" class="image"><img src="images/babak.png" style="width: 50%; height: 50%" alt="" /></a>
 											<h3>Babak Falsafi</h3>
 											<!-- <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p> -->
 											<ul class="actions">
